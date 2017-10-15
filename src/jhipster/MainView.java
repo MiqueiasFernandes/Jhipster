@@ -5,13 +5,11 @@
  */
 package jhipster;
 
-import java.io.BufferedReader;
+import java.awt.event.KeyEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
@@ -57,6 +55,9 @@ public class MainView extends javax.swing.JFrame {
         jProgressBar1 = new javax.swing.JProgressBar();
         jButton3 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel4 = new javax.swing.JLabel();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,7 +102,7 @@ public class MainView extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jTextField2.setText("/home/mfernandes/Documentos/nome/");
+        jTextField2.setText("/home/mfernandes/nome/");
 
         jButton3.setText("entidades");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +114,13 @@ public class MainView extends javax.swing.JFrame {
         jCheckBox1.setSelected(true);
         jCheckBox1.setText("sair automatico");
 
+        jLabel4.setText("00:00");
+        jLabel4.setEnabled(false);
+
+        jCheckBox2.setText("HTML Editor");
+
+        jCheckBox3.setText("QRCode Reader");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,22 +131,32 @@ public class MainView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2)
+                            .addComponent(jCheckBox1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addGap(50, 50, 50))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel3)
                                 .addComponent(jTextField1)
+                                .addComponent(jTextField2)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jButton1)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jButton3))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(31, 31, 31)
-                                    .addComponent(jLabel2))
-                                .addComponent(jTextField2))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton2)
-                                .addComponent(jCheckBox1)))
-                        .addContainerGap())))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jButton1)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jButton3))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(31, 31, 31)
+                                            .addComponent(jLabel2)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addComponent(jCheckBox2)
+                            .addComponent(jCheckBox3))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
             .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
@@ -158,10 +176,16 @@ public class MainView extends javax.swing.JFrame {
                             .addComponent(jButton3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox3)
+                        .addGap(58, 58, 58)
                         .addComponent(jCheckBox1)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(jLabel4))
                         .addGap(13, 13, 13)
                         .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -185,277 +209,13 @@ public class MainView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    boolean terminou = false;
+
+    int min = 0, seg = 0;
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        File dir = new File(jTextField2.getText());
-
-        if (!dir.mkdirs()) {
-            JOptionPane.showMessageDialog(rootPane, "Impossivel criar diretorio " + dir.getAbsolutePath());
-            return;
-        }
-
-        jProgressBar1.setValue(10);
-
-        if (!setFileConfig()) {
-            return;
-        }
-        jProgressBar1.setValue(20);
-
-        DefaultCaret caret = (DefaultCaret) jTextArea1.getCaret();
-        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                try {
-
-                    int cont = 0;
-                    Process exec = Runtime.getRuntime().exec("jhipster", new String[]{""}, dir);
-
-                    Scanner sc = new Scanner(exec.getInputStream());
-
-                    while (sc.hasNextLine()) {
-                        String next = sc.nextLine();
-
-                        jTextArea1.append(next + "\n");
-
-                        if (cont++ > 1000) {
-                            jTextArea1.setText("");
-                            cont = 0;
-                        }
-
-                    }
-
-                    jProgressBar1.setValue(50);
-
-                    ///imagns
-                    if (selectedFiles != null) {
-                        for (File file : selectedFiles) {
-
-                            if (file.getName().endsWith(".ico")) {
-
-                                Files.copy(
-                                        file.toPath(),
-                                        new File(dir.getAbsolutePath() + "/src/main/webapp/favicon.ico").toPath(),
-                                        StandardCopyOption.REPLACE_EXISTING);
-
-                                jTextArea1.append("armazenando icone..\n");
-
-                            } else if (file.getName().contains("logo")) {
-
-                                jTextArea1.append("armazenando logo..\n");
-
-                                Files.copy(
-                                        file.toPath(),
-                                        new File(dir.getAbsolutePath() + "/src/main/webapp/content/images/logo-jhipster.png").toPath(),
-                                        StandardCopyOption.REPLACE_EXISTING);
-
-                            } else if (file.getName().contains("2")) {
-                                Files.copy(
-                                        file.toPath(),
-                                        new File(dir.getAbsolutePath() + "/src/main/webapp/content/images/hipster2x.png").toPath(),
-                                        StandardCopyOption.REPLACE_EXISTING);
-                                jTextArea1.append("armazenando imagem1..\n");
-                            } else {
-                                Files.copy(
-                                        file.toPath(),
-                                        new File(dir.getAbsolutePath() + "/src/main/webapp/content/images/hipster.png").toPath(),
-                                        StandardCopyOption.REPLACE_EXISTING);
-                                jTextArea1.append("armazenando imagem2..\n");
-                            }
-
-                        }
-                    }
-
-                    jProgressBar1.setValue(55);
-
-                    ///entidades
-                    if (jdl != null) {
-                        exec = Runtime.getRuntime().exec(new String[]{"jhipster", "import-jdl", jdl, "--force"}, new String[]{""}, dir);
-
-                        sc = new Scanner(exec.getInputStream());
-
-                        while (sc.hasNextLine()) {
-                            String next = sc.nextLine();
-
-                            jTextArea1.append(next + "\n");
-
-                            if (cont++ > 1000) {
-                                jTextArea1.setText("");
-                                cont = 0;
-                            }
-
-                        }
-
-                        sc = new Scanner(exec.getErrorStream());
-
-                        while (sc.hasNextLine()) {
-                            String next = sc.nextLine();
-
-                            jTextArea1.append("ATENCAO: " + next + "\n");
-
-                            if (cont++ > 1000) {
-                                jTextArea1.setText("");
-                                cont = 0;
-                            }
-
-                        }
-                    }
-                    jProgressBar1.setValue(60);
-
-                    ////pace
-                    ///yo jhipster-pace
-                    exec = Runtime.getRuntime().exec(new String[]{"yo", "jhipster-pace", "--force"}, new String[]{""}, dir);
-
-                    sc = new Scanner(exec.getInputStream());
-                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(exec.getOutputStream()));
-                    bufferedWriter.newLine();
-                    bufferedWriter.flush();
-                    bufferedWriter.newLine();
-                    bufferedWriter.flush();
-                    bufferedWriter.newLine();
-                    bufferedWriter.flush();
-                    bufferedWriter.newLine();
-                    bufferedWriter.flush();
-                    while (sc.hasNextLine()) {
-                        String next = sc.nextLine();
-
-                        if (cont++ > 1000) {
-                            jTextArea1.setText("");
-                            cont = 0;
-                        }
-
-                        jTextArea1.append(next + "\n");
-
-                    }
-
-                    jProgressBar1.setValue(80);
-                    //yo jhipster-angular-datatables
-
-                    ///banner
-                    exec = Runtime.getRuntime().exec(new String[]{"yo", "jhipster-banner", "--force"}, new String[]{""}, dir);
-
-                    sc = new Scanner(exec.getInputStream());
-
-                    sc = new Scanner(exec.getInputStream());
-                    bufferedWriter = new BufferedWriter(new OutputStreamWriter(exec.getOutputStream()));
-                    bufferedWriter.append(jTextField1.getText());
-                    bufferedWriter.newLine();
-                    bufferedWriter.flush();
-                    bufferedWriter.newLine();
-                    bufferedWriter.flush();
-                    bufferedWriter.newLine();
-                    bufferedWriter.flush();
-                    bufferedWriter.append("n");
-                    bufferedWriter.newLine();
-                    bufferedWriter.flush();
-
-                    while (sc.hasNextLine()) {
-                        String next = sc.nextLine();
-
-                        if (next.contains("banner message you wish to convert to ASCII")) {
-                            bufferedWriter.newLine();
-                            bufferedWriter.flush();
-                            next += "  " + jTextField1.getText();
-                        }
-
-                        if (next.contains("like to use")) {
-                            bufferedWriter.newLine();
-                            bufferedWriter.flush();
-                            next += " ENTER ";
-                        }
-                        if (next.contains("append")) {
-                            bufferedWriter.append("n");
-                            bufferedWriter.newLine();
-                            bufferedWriter.flush();
-                            next += " n ENTER ";
-                        }
-
-                        if (cont++ > 1000) {
-                            jTextArea1.setText("");
-                            cont = 0;
-                        }
-
-                        jTextArea1.append(next + "\n");
-
-                    }
-
-                    jProgressBar1.setValue(90);
-
-                    ///material & navbar
-                    String addGlobal = ".dropdown-menu {\\n"
-                            + "    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);\\n"
-                            + "    border-radius: 0px;\\n"
-                            + "}\\n"
-                            + "\\n"
-                            + ".modal-content {\\n"
-                            + "    border-radius: 0px;\\n"
-                            + "    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\\n"
-                            + "}\\n"
-                            + "\\n"
-                            + ".container-fluid {\\n"
-                            + "    padding-top: 55px;\\n"
-                            + "}\\n\\n";
-
-//                    Runtime.getRuntime().exec(new String[]{"echo", addGlobal,
-//                        ">>" , dir.getAbsolutePath()  +  "src/main/webapp/content/scss/global"}).waitFor();
-                    Runtime.getRuntime().exec(new String[]{"sed", "-i", "'1s/^/" + addGlobal + "/'",
-                        dir.getAbsolutePath() + "src/main/webapp/content/scss/global.scss"}).waitFor();
-
-                    String addNav = ".navbar-fixed-top {\\n"
-                            + "    position: fixed;\\n"
-                            + "    right: 0;\\n"
-                            + "    left: 0;\\n"
-                            + "    z-index: 1030;\\n"
-                            + "    top: 0;\\n"
-                            + "}\\n"
-                            + "\\n"
-                            + ".jh-navbar {\\n"
-                            + "    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.19);\\n"
-                            + "}\\n\\n";
-
-                    Runtime.getRuntime().exec(new String[]{"sed", "-i", "'1s/^/" + addNav + "/'",
-                        dir.getAbsolutePath() + "src/main/webapp/app/layouts/navbar/navbar.scss"}).waitFor();
-
-//                    String replaceInNavHtml = " navbar-fixed-top\">";
-                    Runtime.getRuntime().exec(new String[]{"sed", "-i", "'1s/\">/ navbar-fixed-top\">/'",
-                        dir.getAbsolutePath() + "src/main/webapp/app/layouts/navbar/navbar.html"}).waitFor();
-
-//                    "content: 'LOADING';";
-//                    String labelLoad = "content: 'CARREGANDO SISTEMA...';";
-                    Runtime.getRuntime().exec(new String[]{"sed", "-i",
-                        "'s/LOADING/CARREGANDO SISTEMA.../'",
-                        dir.getAbsolutePath() + "src/main/webapp/index.html"}).waitFor();
-
-                    jProgressBar1.setValue(100);
-
-                    JOptionPane.showMessageDialog(rootPane, "O app foi criado com sucesso!");
-
-                    Runtime.getRuntime().exec(new String[]{"gnome-terminal",
-                        "--working-directory=" + dir.getAbsolutePath(), "-x", "./mvnw"}).waitFor();
-
-                    Runtime.getRuntime().exec(new String[]{"gnome-terminal",
-                        "--working-directory=" + dir.getAbsolutePath(), "-x", "sudo", "yarn", "start"}).waitFor();
-                    Runtime.getRuntime().exec(new String[]{"gnome-terminal",
-                        "--working-directory=" + dir.getAbsolutePath(), "-x", "yarn", "install"}).waitFor();
-
-                    Runtime.getRuntime().exec(new String[]{"git", "init"}).waitFor();
-                    Runtime.getRuntime().exec(new String[]{"git", "add", "*"}).waitFor();
-                    Runtime.getRuntime().exec(new String[]{"git", "commit", "-m", "\"commit inicial\""}).waitFor();
-                    if (jCheckBox1.isSelected()) {
-                        System.exit(0);
-                    }
-
-                } catch (IOException ex) {
-                    Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-        }).start();
-
+        criar();
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -468,6 +228,11 @@ public class MainView extends javax.swing.JFrame {
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         jTextField2.setText("/home/mfernandes/" + jTextField1.getText().toLowerCase() + "/");
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            criar();
+        }
+
     }//GEN-LAST:event_jTextField1KeyReleased
 
     private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
@@ -603,13 +368,472 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
+
+    private void criar() {
+
+        jLabel4.setEnabled(true);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (!terminou) {
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    seg++;
+
+                    if (seg > 59) {
+                        seg = 0;
+                        min++;
+                    }
+                    jLabel4.setText(min + ":" + seg);
+                }
+            }
+        }).start();
+
+        File dir = new File(jTextField2.getText());
+
+        if (!dir.mkdirs()) {
+            JOptionPane.showMessageDialog(rootPane, "Impossivel criar diretorio " + dir.getAbsolutePath());
+            return;
+        }
+
+        jProgressBar1.setValue(10);
+
+        if (!setFileConfig()) {
+            return;
+        }
+        jProgressBar1.setValue(20);
+
+        DefaultCaret caret = (DefaultCaret) jTextArea1.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+
+                    java.awt.Toolkit.getDefaultToolkit().beep();
+
+                    int cont = 0;
+                    Process exec = Runtime.getRuntime().exec("jhipster", new String[]{""}, dir);
+
+                    Scanner sc = new Scanner(exec.getInputStream());
+
+                    while (sc.hasNextLine()) {
+                        String next = sc.nextLine();
+
+                        jTextArea1.append(next + "\n");
+
+                        if (cont++ > 1000) {
+                            jTextArea1.setText("");
+                            cont = 0;
+                        }
+
+                    }
+
+                    jProgressBar1.setValue(50);
+
+                    ///imagns
+                    if (selectedFiles != null) {
+                        for (File file : selectedFiles) {
+
+                            if (file.getName().endsWith(".ico")) {
+
+                                Files.copy(
+                                        file.toPath(),
+                                        new File(dir.getAbsolutePath() + "/src/main/webapp/favicon.ico").toPath(),
+                                        StandardCopyOption.REPLACE_EXISTING);
+
+                                jTextArea1.append("armazenando icone..\n");
+
+                            } else if (file.getName().contains("logo")) {
+
+                                jTextArea1.append("armazenando logo..\n");
+
+                                Files.copy(
+                                        file.toPath(),
+                                        new File(dir.getAbsolutePath() + "/src/main/webapp/content/images/logo-jhipster.png").toPath(),
+                                        StandardCopyOption.REPLACE_EXISTING);
+
+                            } else if (file.getName().contains("2")) {
+                                Files.copy(
+                                        file.toPath(),
+                                        new File(dir.getAbsolutePath() + "/src/main/webapp/content/images/hipster2x.png").toPath(),
+                                        StandardCopyOption.REPLACE_EXISTING);
+                                jTextArea1.append("armazenando imagem1..\n");
+                            } else {
+                                Files.copy(
+                                        file.toPath(),
+                                        new File(dir.getAbsolutePath() + "/src/main/webapp/content/images/hipster.png").toPath(),
+                                        StandardCopyOption.REPLACE_EXISTING);
+                                jTextArea1.append("armazenando imagem2..\n");
+                            }
+
+                        }
+                    }
+
+                    jProgressBar1.setValue(55);
+
+                    ///entidades
+                    if (jdl != null) {
+                        exec = Runtime.getRuntime().exec(new String[]{"jhipster", "import-jdl", jdl, "--force"}, new String[]{""}, dir);
+
+                        sc = new Scanner(exec.getInputStream());
+
+                        while (sc.hasNextLine()) {
+                            String next = sc.nextLine();
+
+                            jTextArea1.append(next + "\n");
+
+                            if (cont++ > 1000) {
+                                jTextArea1.setText("");
+                                cont = 0;
+                            }
+
+                        }
+
+                        sc = new Scanner(exec.getErrorStream());
+
+                        while (sc.hasNextLine()) {
+                            String next = sc.nextLine();
+
+                            jTextArea1.append("ATENCAO: " + next + "\n");
+
+                            if (cont++ > 1000) {
+                                jTextArea1.setText("");
+                                cont = 0;
+                            }
+
+                        }
+                    }
+                    jProgressBar1.setValue(60);
+
+                    ////pace
+                    ///yo jhipster-pace
+                    exec = Runtime.getRuntime().exec(new String[]{"yo", "jhipster-pace", "--force"}, new String[]{""}, dir);
+
+                    sc = new Scanner(exec.getInputStream());
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(exec.getOutputStream()));
+                    bufferedWriter.newLine();
+                    bufferedWriter.flush();
+                    bufferedWriter.newLine();
+                    bufferedWriter.flush();
+                    bufferedWriter.newLine();
+                    bufferedWriter.flush();
+                    bufferedWriter.newLine();
+                    bufferedWriter.flush();
+                    while (sc.hasNextLine()) {
+                        String next = sc.nextLine();
+
+                        if (cont++ > 1000) {
+                            jTextArea1.setText("");
+                            cont = 0;
+                        }
+
+                        jTextArea1.append(next + "\n");
+
+                    }
+
+                    jProgressBar1.setValue(80);
+
+                    ///banner
+                    exec = Runtime.getRuntime().exec(new String[]{"yo", "jhipster-banner", "--force"}, new String[]{""}, dir);
+
+                    sc = new Scanner(exec.getInputStream());
+                    bufferedWriter = new BufferedWriter(new OutputStreamWriter(exec.getOutputStream()));
+                    bufferedWriter.append(jTextField1.getText());
+                    bufferedWriter.newLine();
+                    bufferedWriter.flush();
+                    bufferedWriter.append("n");
+                    bufferedWriter.newLine();
+                    bufferedWriter.flush();
+                    bufferedWriter.append("n");
+                    bufferedWriter.newLine();
+                    bufferedWriter.flush();
+                    bufferedWriter.append("n");
+                    bufferedWriter.newLine();
+                    bufferedWriter.flush();
+                    bufferedWriter.append("n");
+                    bufferedWriter.newLine();
+                    bufferedWriter.flush();
+                    bufferedWriter.append("n");
+                    bufferedWriter.newLine();
+                    bufferedWriter.flush();
+                    bufferedWriter.newLine();
+                    bufferedWriter.flush();
+                    bufferedWriter.newLine();
+                    bufferedWriter.flush();
+                    bufferedWriter.newLine();
+                    bufferedWriter.flush();
+                    bufferedWriter.append("n");
+                    bufferedWriter.newLine();
+                    bufferedWriter.flush();
+
+                    while (sc.hasNextLine()) {
+                        String next = sc.nextLine();
+
+                        if (next.contains("banner message you wish to convert to ASCII")) {
+                            bufferedWriter.newLine();
+                            bufferedWriter.flush();
+                            next += "  " + jTextField1.getText();
+                        }
+
+                        if (next.contains("like to use")) {
+                            bufferedWriter.newLine();
+                            bufferedWriter.flush();
+                            next += " ENTER ";
+                        }
+                        if (next.contains("append")) {
+                            bufferedWriter.append("n");
+                            bufferedWriter.newLine();
+                            bufferedWriter.flush();
+                            next += " n ENTER ";
+                        }
+
+                        if (cont++ > 1000) {
+                            jTextArea1.setText("");
+                            cont = 0;
+                        }
+
+                        jTextArea1.append(next + "\n");
+
+                    }
+
+                    jProgressBar1.setValue(90);
+
+                    ///material & navbar
+                    StringBuffer stringBuffer = new StringBuffer(".dropdown-menu {\n"
+                            + "    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);\n"
+                            + "    border-radius: 0px;\n"
+                            + "}\n"
+                            + "\n"
+                            + ".modal-content {\n"
+                            + "    border-radius: 0px;\n"
+                            + "    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n"
+                            + "}\n"
+                            + "\n"
+                            + ".container-fluid {\n"
+                            + "    padding-top: 55px;\n"
+                            + "}\n"
+                            + ".footer {\n"
+                            + "    margin-top: 10px;\n"
+                            + "    text-align: center;\n"
+                            + "    padding-top: 10px;\n"
+                            + "}\n");
+
+                    sc = new Scanner(new File(dir.getAbsolutePath() + "/src/main/webapp/content/scss/global.scss"));
+
+                    while (sc.hasNextLine()) {
+                        stringBuffer.append(sc.nextLine()).append("\n");
+                    }
+                    sc.close();
+                    FileWriter fw = new FileWriter(new File(dir.getAbsolutePath() + "/src/main/webapp/content/scss/global.scss"));
+                    fw.write(stringBuffer.toString());
+                    fw.close();
+
+                    stringBuffer = new StringBuffer(".navbar-fixed-top {\n"
+                            + "    position: fixed;\n"
+                            + "    right: 0;\n"
+                            + "    left: 0;\n"
+                            + "    z-index: 1030;\n"
+                            + "    top: 0;\n"
+                            + "}\n"
+                            + "\n"
+                            + ".jh-navbar {\n"
+                            + "    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.19);\n"
+                            + "}\n\n");
+
+                    sc = new Scanner(new File(dir.getAbsolutePath() + "/src/main/webapp/app/layouts/navbar/navbar.scss"));
+
+                    while (sc.hasNextLine()) {
+                        stringBuffer.append(sc.nextLine()).append("\n");
+                    }
+                    sc.close();
+                    fw = new FileWriter(new File(dir.getAbsolutePath() + "/src/main/webapp/app/layouts/navbar/navbar.scss"));
+                    fw.write(stringBuffer.toString());
+                    fw.close();
+
+                    stringBuffer = new StringBuffer();
+                    sc = new Scanner(new File(dir.getAbsolutePath() + "/src/main/webapp/app/layouts/navbar/navbar.component.html"));
+
+                    boolean prim = true;
+
+                    while (sc.hasNextLine()) {
+                        String next = sc.nextLine();
+                        if (prim) {
+                            prim = false;
+                            stringBuffer.append("<nav class=\"navbar navbar-dark navbar-expand-md jh-navbar navbar-fixed-top\">\n");
+                            continue;
+                        }
+
+                        stringBuffer.append(next).append("\n");
+                    }
+                    sc.close();
+                    fw = new FileWriter(new File(dir.getAbsolutePath() + "/src/main/webapp/app/layouts/navbar/navbar.component.html"));
+                    fw.write(stringBuffer.toString());
+                    fw.close();
+
+                    stringBuffer = new StringBuffer();
+
+                    sc = new Scanner(new File(dir.getAbsolutePath() + "/src/main/webapp/index.html"));
+
+                    while (sc.hasNextLine()) {
+
+                        String next = sc.nextLine();
+
+                        if (next.contains("<style type=\"text/css\">")) {
+                            stringBuffer.append("<script>\n"
+                                    + "        slidingTagLiAfterStyle = document.createElement(\"style\");\n"
+                                    + "        slidingTagLiAfterStyle.innerHTML = `");
+                            continue;
+                        }
+
+                        if (next.contains("content: 'LOADING';")) {
+                            stringBuffer.append("            content: 'Carregando 0%';\n");
+                            continue;
+                        }
+
+                        if (next.contains("</style>")) {
+                            stringBuffer.append("`;\n"
+                                    + "        document.head.appendChild(slidingTagLiAfterStyle);\n"
+                                    + "        window.paceOptions = {\n"
+                                    + "            document: true,\n"
+                                    + "            eventLag: true,\n"
+                                    + "            restartOnPushState: true,\n"
+                                    + "            restartOnRequestAfter: true,\n"
+                                    + "            ajax: {\n"
+                                    + "                trackMethods: ['POST', 'GET']\n"
+                                    + "            }\n"
+                                    + "        };\n"
+                                    + "\n"
+                                    + "        window.XMLHttpRequest_old = window.XMLHttpRequest;\n"
+                                    + "    </script>");
+                            continue;
+                        }
+
+                        if (next.contains("<script src=\"/content/pace-progress/pace.js\"></script>")) {
+                            stringBuffer
+                                    .append(next)
+                                    .append("\n<script>\n"
+                                            + "        progreso = 0;\n"
+                                            + "        kbs = 0;\n"
+                                            + "        tam = 10 * 1000;\n"
+                                            + "        cont = 0;\n"
+                                            + "\n"
+                                            + "        var xmlhttp;\n"
+                                            + "        (function() {\n"
+                                            + "\n"
+                                            + "            if (window.XMLHttpRequest) {\n"
+                                            + "                xmlhttp = new XMLHttpRequest();\n"
+                                            + "            } else {\n"
+                                            + "                xmlhttp = new ActiveXObject(\"Microsoft.XMLHTTP\");\n"
+                                            + "            }\n"
+                                            + "\n"
+                                            + "            var d = new Date();\n"
+                                            + "            var start = d.getTime();\n"
+                                            + "            xmlhttp.onreadystatechange = function() {\n"
+                                            + "                if (this.readyState == 4 && this.status == 200) {\n"
+                                            + "                    var timeG = (new Date().getTime()) - start;\n"
+                                            + "                    kbs = Math.floor(4.5 / (timeG / 1000));\n"
+                                            + "                    progresso();\n"
+                                            + "                }\n"
+                                            + "            };\n"
+                                            + "            xmlhttp.open(\"GET\", \"index.html\", true);\n"
+                                            + "            xmlhttp.send();\n"
+                                            + "        }).call(this);\n"
+                                            + "\n"
+                                            + "        function progresso() {\n"
+                                            + "\n"
+                                            + "            progreso += kbs;\n"
+                                            + "            var perc = Math.round((progreso / tam) * 1000);\n"
+                                            + "\n"
+                                            + "            slidingTagLiAfterStyle.innerHTML =\n"
+                                            + "                slidingTagLiAfterStyle.innerHTML.replace(/content: 'Carregando [0-9]+%';/,\n"
+                                            + "                    \"content: 'Carregando \" + perc + \"%';\");\n"
+                                            + "\n"
+                                            + "            if (perc < 99)\n"
+                                            + "                setTimeout(function() {\n"
+                                            + "                    progresso();\n"
+                                            + "                }, 1000);\n"
+                                            + "        }\n"
+                                            + "\n"
+                                            + "        window.XMLHttpRequest = window.XMLHttpRequest_old;\n"
+                                            + "    </script>");
+                            continue;
+                        }
+
+                        stringBuffer.append(next).append("\n");
+                    }
+
+                    sc.close();
+                    fw = new FileWriter(new File(dir.getAbsolutePath() + "/src/main/webapp/index.html"));
+                    fw.write(stringBuffer.toString());
+                    fw.close();
+
+                    fw = new FileWriter(dir.getAbsolutePath() + "/src/main/webapp/app/layouts/footer/footer.component.html");
+                    fw.write("<div class=\"footer\">\n"
+                            + "    <p>®2017 Miquéias Fernandes | "
+                            + "<a href=\"http://www.mikeias.net\" target=\"_blanck\">www.mikeias.net</a> | "
+                            + "contatomiqueiasfernandes@hotmail.com | "
+                            + "(28) 99985-0280</p>\n"
+                            + "</div>");
+                    fw.close();
+
+                    Runtime.getRuntime().exec(new String[]{"gnome-terminal", /////"--disable-factory",
+                        "--working-directory=" + dir.getAbsolutePath(), "-x", "yarn", "install"}).waitFor();
+
+                    jProgressBar1.setValue(100);
+                    terminou = true;
+
+                    java.awt.Toolkit.getDefaultToolkit().beep();
+
+                    JOptionPane.showMessageDialog(rootPane, "O app foi criado com sucesso!");
+
+                    Runtime.getRuntime().exec(new String[]{"gnome-terminal",
+                        "--working-directory=" + dir.getAbsolutePath(), "-x", "./mvnw"}).waitFor();
+                    if (jCheckBox2.isSelected())
+                    Runtime.getRuntime().exec(new String[]{"gnome-terminal",
+                        "--working-directory=" + dir.getAbsolutePath(), "-x", "npm install ngx-quill-editor --save"}).waitFor();
+                    if (jCheckBox3.isSelected())
+                    Runtime.getRuntime().exec(new String[]{"gnome-terminal",
+                        "--working-directory=" + dir.getAbsolutePath(), "-x", "npm install --save angular2-qrscanner"}).waitFor();
+                    
+                    Runtime.getRuntime().exec(new String[]{"gnome-terminal",
+                        "--working-directory=" + dir.getAbsolutePath(), "-x", "sudo", "yarn", "start"}).waitFor();
+
+                    Runtime.getRuntime().exec(new String[]{"git", "init"}, new String[]{""}, dir).waitFor();
+                    Runtime.getRuntime().exec(new String[]{"git", "add", "*"}, new String[]{""}, dir).waitFor();
+                    Runtime.getRuntime().exec(new String[]{"git", "commit", "-m", "\"commit inicial\""}, new String[]{""}, dir).waitFor();
+                    if (jCheckBox1.isSelected()) {
+                        System.exit(0);
+                    }
+
+                } catch (IOException ex) {
+                    Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        }).start();
+
+    }
 }
