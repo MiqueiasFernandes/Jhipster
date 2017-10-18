@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +21,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.text.DefaultCaret;
+import jhipster.files.Resources;
 
 /**
  *
@@ -58,6 +60,9 @@ public class MainView extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
+        jCheckBox4 = new javax.swing.JCheckBox();
+        jCheckBox5 = new javax.swing.JCheckBox();
+        jCheckBox6 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,6 +126,17 @@ public class MainView extends javax.swing.JFrame {
 
         jCheckBox3.setText("QRCode Reader");
 
+        jCheckBox4.setText("Table Header");
+        jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox4ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox5.setText("Preferências e Privilégios");
+
+        jCheckBox6.setText("autoLogin");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,19 +158,19 @@ public class MainView extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jTextField1)
                                 .addComponent(jTextField2)
+                                .addComponent(jLabel3)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jButton1)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jButton3))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(31, 31, 31)
-                                            .addComponent(jLabel2)))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                    .addComponent(jButton1)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jButton3))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(31, 31, 31)
+                                    .addComponent(jLabel2)))
                             .addComponent(jCheckBox2)
-                            .addComponent(jCheckBox3))
+                            .addComponent(jCheckBox3)
+                            .addComponent(jCheckBox4)
+                            .addComponent(jCheckBox5)
+                            .addComponent(jCheckBox6))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addComponent(jScrollPane1)
@@ -162,7 +178,10 @@ public class MainView extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(jLabel2)
@@ -180,16 +199,21 @@ public class MainView extends javax.swing.JFrame {
                         .addComponent(jCheckBox2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jCheckBox3)
-                        .addGap(58, 58, 58)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jCheckBox1)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton2)
                             .addComponent(jLabel4))
                         .addGap(13, 13, 13)
-                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
         );
 
@@ -219,6 +243,181 @@ public class MainView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    void teste2() {
+
+        String content = "            <label>Permissões</label>\n"
+                + "            <div class=\"table-responsive\">\n"
+                + "            <table class=\"table table-striped\">\n"
+                + "                <thead>\n"
+                + "                <th>\n"
+                + "                    Entidade\n"
+                + "                </th>\n"
+                + "                <th>\n"
+                + "                    visualizar\n"
+                + "                </th>\n"
+                + "                <th>\n"
+                + "                    Adicionar\n"
+                + "                </th>\n"
+                + "                <th>\n"
+                + "                    Editar\n"
+                + "                </th>\n"
+                + "                <th>\n"
+                + "                    Deletar\n"
+                + "                </th>\n"
+                + "                </thead>\n"
+                + "                <tbody>\n"
+                + "                <tr *ngFor=\"let entidade of entidades\">\n"
+                + "                    <td>{{entidade}}</td>\n"
+                + "                    <td>\n"
+                + "                        <input #vari1 type=\"checkbox\" class=\"form-control\"\n"
+                + "                               (change)=\"setCheck(vari1.checked, entidade, 'visualizar')\" [checked]=\"checks[entidade]['visualizar']\" />\n"
+                + "                    </td>\n"
+                + "                    <td>\n"
+                + "                        <input #vari2 type=\"checkbox\" class=\"form-control\"\n"
+                + "                               (change)=\"setCheck(vari2.checked, entidade, 'adicionar')\" [checked]=\"checks[entidade]['adicionar']\" />\n"
+                + "                    </td>\n"
+                + "                    <td>\n"
+                + "                        <input #vari3 type=\"checkbox\" class=\"form-control\"\n"
+                + "                               (change)=\"setCheck(vari3.checked, entidade, 'editar')\" [checked]=\"checks[entidade]['editar']\" />\n"
+                + "                    </td>\n"
+                + "                    <td>\n"
+                + "                        <input #vari4 type=\"checkbox\" class=\"form-control\"\n"
+                + "                               (change)=\"setCheck(vari4.checked, entidade, 'deletar')\" [checked]=\"checks[entidade]['deletar']\" />\n"
+                + "                    </td>\n"
+                + "                </tr>\n"
+                + "                </tbody>\n"
+                + "            </table>\n"
+                + "            </div>";
+
+        Resources.insertOnIntervalo(content, ".*nome7App.cargo.permissao.*", ".*cargo.permissao.*", false, false,
+                "/home/mfernandes/nome7/src/main/webapp/app/entities/cargo/cargo-dialog.component.html");
+
+        Resources.insertOnIntervalo("   save() {\n"
+                + "        this.isSaving = true;\n"
+                + "\n"
+                + "        let priv = \"\";\n"
+                + "\n"
+                + "        this.entidades.forEach((ent :string) => {\n"
+                + "            this.niveis.forEach((nv: string) => {\n"
+                + "                if (this.checks[ent][nv]) {\n"
+                + "                    priv += ent + \"-\" + nv + \",\";\n"
+                + "                }\n"
+                + "            });\n"
+                + "        });\n"
+                + "\n"
+                + "\n"
+                + "        this.cargo.permissao = priv;\n"
+                + "\n"
+                + "        if (this.cargo.id !== undefined) {\n"
+                + "            this.subscribeToSaveResponse(\n"
+                + "                this.cargoService.update(this.cargo));\n"
+                + "        } else {\n"
+                + "            this.subscribeToSaveResponse(\n"
+                + "                this.cargoService.create(this.cargo));\n"
+                + "        }\n"
+                + "    }\n"
+                + "\n"
+                + "  setCheck(checked: boolean, entidade: string, nivel: string) {\n"
+                + "        this.checks[entidade][nivel] = checked;\n"
+                + "        console.log(checked + entidade + nivel);\n"
+                + "        console.log(this.checks);\n"
+                + "    }", ".*save[() {].*", ".*subscribeToSaveResponse.*", false, false, "/home/mfernandes/nome7/src/main/webapp/app/entities/cargo/cargo-dialog.component.ts");
+
+        Resources.insertOnIntervalo(
+                "this.isSaving = false;\n"
+                + " this.cargo.permissao.split(',').forEach((privilegio: string) => {\n"
+                + "            const data: string[] = privilegio.split(\"_\");\n"
+                + "            if (!isNullOrUndefined(data) && data.length === 2) {\n"
+                + "                this.checks[data[0]][data[1]] = true;\n"
+                + "            }\n"
+                + "        });", ".*ngOnInit[() {].*", ".*}.*", true, true, "/home/mfernandes/nome7/src/main/webapp/app/entities/cargo/cargo-dialog.component.ts");
+
+        Resources.insertOnIntervalo("    entidades: string[] = [\n"
+                + "        \"cardapio\",\n"
+                + "        \"cargo\",\n"
+                + "        \"cliente\",\n"
+                + "        \"colaborador\",\n"
+                + "        \"comanda\",\n"
+                + "        \"endereco\",\n"
+                + "        \"imposto\",\n"
+                + "        \"lancamento\",\n"
+                + "        \"mesa\",\n"
+                + "        \"nota\",\n"
+                + "        \"produto\",\n"
+                + "        \"restaurante\",\n"
+                + "        \"venda\"\n"
+                + "    ];\n"
+                + "\n"
+                + "    niveis: string[] = [\n"
+                + "        \"visualizar\",\n"
+                + "        \"adicionar\",\n"
+                + "        \"editar\",\n"
+                + "        \"deletar\"\n"
+                + "    ];\n"
+                + "\n"
+                + "    checks: boolean[][] = [];\n"
+                + "\n"
+                + "\n"
+                + "\n"
+                + "    constructor(\n"
+                + "        public activeModal: NgbActiveModal,\n"
+                + "        private dataUtils: JhiDataUtils,\n"
+                + "        private jhiAlertService: JhiAlertService,\n"
+                + "        private cargoService: CargoService,\n"
+                + "        private eventManager: JhiEventManager\n"
+                + "    ) {\n"
+                + "        this.entidades.forEach((ent :string) => {\n"
+                + "\n"
+                + "            const bols:boolean[] = [];\n"
+                + "\n"
+                + "            bols[\"visualizar\"] = false;\n"
+                + "            bols[\"adicionar\"] = false;\n"
+                + "            bols[\"editar\"] = false;\n"
+                + "            bols[\"deletar\"] = false;\n"
+                + "\n"
+                + "            this.checks[ent] = bols;\n"
+                + "        })\n"
+                + "    }", ".*constructor.*", ".*}.*", false, false,
+                "/home/mfernandes/nome7/src/main/webapp/app/entities/cargo/cargo-dialog.component.ts");
+
+    }
+
+//    void teste() {
+//
+//        String projeto = "nome9";
+//        String pastaJAVA = "/home/mfernandes/nome9/src/main/java/com/mikeias/nome9/";
+//
+//        String fs = pastaJAVA + "web/rest/";
+//
+//        Resources.projeto = projeto;
+//
+//        Resources.applyInMassa(fs.replace("/src/main/", "/src/test/"), ".*Resource.*", ".*Account.*|.*Audit.*|.*Logs.*|.*Profile.*|.*User.*|.*Cargo.*",
+//                "insertOnPositionFile", new Object[]{
+//                    "import com.mikeias.${{projeto}}$.repository.CargoRepository;\n",
+//                    2,
+//                    -1,
+//                    new File(projeto)
+//                }, 0);
+//
+//        Resources.applyInMassa(fs.replace("/src/main/", "/src/test/"), ".*Resource.*", ".*Account.*|.*Audit.*|.*Logs.*|.*Profile.*|.*User.*|.*Cargo.*",
+//                "insertOnFile", new Object[]{
+//                    "    private CargoRepository cargoRepository;\n\n "
+//                    + "    @Autowired\n",
+//                    "@Autowired",
+//                    new File(pastaJAVA),
+//                    true
+//                }, -1);
+//        Resources.retirarDeFileNome = "ResourceIntTest";
+//
+//        Resources.applyInMassa(fs.replace("/src/main/", "/src/test/"), ".*Resource.*", ".*Account.*|.*Audit.*|.*Logs.*|.*Profile.*|.*User.*|.*Cargo.*",
+//                "insertOnIntervalo", new Object[]{
+//                    "        final ${{filenameAlterado}}$Resource ${{filenamealterado}}$Resource = new ${{filenameAlterado}}$Resource(${{filenamealterado}}$Repository,cargoRepository);\n",
+//                    ".*final.*Resource.*Resource.*new .*Resource.*Repository.*",
+//                    ".*this.*", false, true,
+//                    new File(projeto)
+//                }, 0);
+//
+//    }
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
 
@@ -260,6 +459,14 @@ public class MainView extends javax.swing.JFrame {
         jdl = jf.getSelectedFile().getAbsolutePath();
 
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
+        // TODO add your handling code here:
+        if (jCheckBox4.isSelected()) {
+            jCheckBox5.setSelected(true);
+            jCheckBox5.setEnabled(false);
+        }
+    }//GEN-LAST:event_jCheckBox4ActionPerformed
 
     String jdl = null;
 
@@ -370,6 +577,9 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -384,6 +594,7 @@ public class MainView extends javax.swing.JFrame {
     private void criar() {
 
         jLabel4.setEnabled(true);
+        jButton2.setEnabled(false);
 
         new Thread(new Runnable() {
             @Override
@@ -432,27 +643,29 @@ public class MainView extends javax.swing.JFrame {
 
                     java.awt.Toolkit.getDefaultToolkit().beep();
 
-                    int cont = 0;
-                    Process exec = Runtime.getRuntime().exec("jhipster", new String[]{""}, dir);
+                    runCommand(dir, "jhipster");
 
-                    Scanner sc = new Scanner(exec.getInputStream());
-
-                    while (sc.hasNextLine()) {
-                        String next = sc.nextLine();
-
-                        jTextArea1.append(next + "\n");
-
-                        if (cont++ > 1000) {
-                            jTextArea1.setText("");
-                            cont = 0;
-                        }
-
-                    }
-
+//                    int cont = 0;
+//                    Process exec = Runtime.getRuntime().exec("jhipster", new String[]{""}, dir);
+//
+//                    Scanner sc = new Scanner(exec.getInputStream());
+//
+//                    while (sc.hasNextLine()) {
+//                        String next = sc.nextLine();
+//
+//                        jTextArea1.append(next + "\n");
+//
+//                        if (cont++ > 1000) {
+//                            jTextArea1.setText("");
+//                            cont = 0;
+//                        }
+//
+//                    }
                     jProgressBar1.setValue(50);
 
                     ///imagns
                     if (selectedFiles != null) {
+                        jTextArea1.append("###########################INSERINDO IMAGENS###########################\n");
                         for (File file : selectedFiles) {
 
                             if (file.getName().endsWith(".ico")) {
@@ -494,43 +707,17 @@ public class MainView extends javax.swing.JFrame {
 
                     ///entidades
                     if (jdl != null) {
-                        exec = Runtime.getRuntime().exec(new String[]{"jhipster", "import-jdl", jdl, "--force"}, new String[]{""}, dir);
-
-                        sc = new Scanner(exec.getInputStream());
-
-                        while (sc.hasNextLine()) {
-                            String next = sc.nextLine();
-
-                            jTextArea1.append(next + "\n");
-
-                            if (cont++ > 1000) {
-                                jTextArea1.setText("");
-                                cont = 0;
-                            }
-
-                        }
-
-                        sc = new Scanner(exec.getErrorStream());
-
-                        while (sc.hasNextLine()) {
-                            String next = sc.nextLine();
-
-                            jTextArea1.append("ATENCAO: " + next + "\n");
-
-                            if (cont++ > 1000) {
-                                jTextArea1.setText("");
-                                cont = 0;
-                            }
-
-                        }
+                        jTextArea1.append("###########################IMPORTANDO ENTIDADES ###########################\n");
+                        runCommand(dir, "jhipster,import-jdl," + jdl + ",--force");
                     }
                     jProgressBar1.setValue(60);
 
                     ////pace
                     ///yo jhipster-pace
-                    exec = Runtime.getRuntime().exec(new String[]{"yo", "jhipster-pace", "--force"}, new String[]{""}, dir);
+                    jTextArea1.append("###########################DEFININDO LOADING###########################\n");
+                    Process exec = Runtime.getRuntime().exec(new String[]{"yo", "jhipster-pace", "--force"}, new String[]{""}, dir);
 
-                    sc = new Scanner(exec.getInputStream());
+                    Scanner sc = new Scanner(exec.getInputStream());
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(exec.getOutputStream()));
                     bufferedWriter.newLine();
                     bufferedWriter.flush();
@@ -555,6 +742,10 @@ public class MainView extends javax.swing.JFrame {
                     jProgressBar1.setValue(80);
 
                     ///banner
+                    jTextArea1.append("###########################CRIANDO BANER###########################\n");
+
+                    Resources.storeResource("_banner.txt", dir.getAbsolutePath() + "/node_modules/generator-jhipster-banner/generators/app/templates/");
+
                     exec = Runtime.getRuntime().exec(new String[]{"yo", "jhipster-banner", "--force"}, new String[]{""}, dir);
 
                     sc = new Scanner(exec.getInputStream());
@@ -619,7 +810,15 @@ public class MainView extends javax.swing.JFrame {
 
                     jProgressBar1.setValue(90);
 
+                    String projeto = jTextField1.getText().toLowerCase();
+                    String pastaAPP = dir.getAbsolutePath() + "/src/main/webapp/app/";
+                    String pastaJAVA = dir.getAbsolutePath() + "/src/main/java/com/mikeias/" + projeto + "/";
+
+                    jTextArea1.append("###########################CUSTOMIZANDO ALERTS###########################\n");
+                    Resources.storeResource("alert.component.ts", pastaAPP + "shared/alert/");
+
                     ///material & navbar
+                    jTextArea1.append("###########################FIXANDO NAVBAR###########################\n");
                     StringBuffer stringBuffer = new StringBuffer(".dropdown-menu {\n"
                             + "    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);\n"
                             + "    border-radius: 0px;\n"
@@ -797,6 +996,577 @@ public class MainView extends javax.swing.JFrame {
                             + "</div>");
                     fw.close();
 
+                    if (jCheckBox6.isSelected()) {
+                        jTextArea1.append("###########################CRIANDO AUTO LOGIN###########################\n");
+                        ///auto login
+                        Resources.storeResource("autologin.service.ts", pastaAPP + "shared/login/");////////
+                        Resources.replaceAfter("    logout(nonotify? :boolean) {\n"/////////////////////////
+                                + "        if (this.principal.isAuthenticated()) {\n"
+                                + "            this.authServerProvider.logout()\n"
+                                + "                .subscribe(\n"
+                                + "                () => {\n"
+                                + "                },\n"
+                                + "                () => {\n"
+                                + "                },\n"
+                                + "                () => {\n"
+                                + "\n"
+                                + "                    if(nonotify) {\n"
+                                + "                        return;\n"
+                                + "                    }\n"
+                                + "\n"
+                                + "                    this.eventManager.broadcast({\n"
+                                + "                        name: 'logout',\n"
+                                + "                        content: 'logout'\n"
+                                + "                    });\n"
+                                + "                }\n"
+                                + "            );\n"
+                                + "        }\n"
+                                + "        this.principal.authenticate(null);\n"
+                                + "    }\n"
+                                + "}", "logout() {", pastaAPP + "shared/login/login.service.ts", true);
+
+                        Resources.appendFile("export * from './login/autologin.service';",/////////////////////////
+                                pastaAPP + "shared/index.ts");
+
+                        Resources.insertOnFile(///////////////////////////////////////////////////////////////////////
+                                "import {AutologinService} from './login/autologin.service';",
+                                "} from './';", pastaAPP + "shared/shared.module.ts", true);
+
+                        Resources.insertOnFile(//////////////////////////////////////////////////////////////////////
+                                "AutologinService,",
+                                "providers: [", pastaAPP + "shared/shared.module.ts", true);
+
+                        Resources.insertOnFile(
+                                "import { Principal } from '../../shared/auth/principal.service';\n"
+                                + "import { AutologinService } from '../../shared/login/autologin.service';\n"
+                                + "import { JhiEventManager } from 'ng-jhipster';",
+                                "import { JhiLanguageHelper } from '../../shared';",
+                                pastaAPP + "layouts/main/main.component.ts", true);
+
+                        Resources.insertOnFile(
+                                "private loginService :AutologinService,\n"
+                                + "private principal :Principal,"
+                                + "private eventManager: JhiEventManager,",
+                                "constructor(",
+                                pastaAPP + "layouts/main/main.component.ts", true);
+
+                        Resources.replaceAfter("\n        this.principal.identity().then((account) => {\n"
+                                + "            if (!account) {\n"
+                                + "                this.loginService.autoLogin();\n"
+                                + "            } else {\n"
+                                + "                this.loginService.verifyAccount(account);\n"
+                                + "            }\n"
+                                + "        });\n"
+                                + "\n"
+                                + "\n"
+                                + "        this.eventManager.subscribe('logout', (message) => {\n"
+                                + "            this.loginService.autoLogin();\n"
+                                + "        });\n"
+                                + "\n"
+                                + "    }\n"
+                                + "}",
+                                "});",
+                                pastaAPP + "layouts/main/main.component.ts", false);
+
+                        Resources.insertOnFile("        private eventManager: JhiEventManager,",
+                                "constructor(",
+                                pastaAPP + "shared/login/login.service.ts", true);
+
+                        ///teste substituir arquivo
+//                        Resources.insertOnPositionFile(" isAutoLogin() :boolean{\n"////////////////////////////////////
+//                                + "        return false;\n"
+//                                + "    }", -1, 1, pastaAPP + "shared/auth/principal.service.ts");
+                        Resources.storeResource("principal.service.ts", pastaAPP + "shared/auth/");
+
+                        Resources.insertOnPositionFile("import { JhiEventManager } from 'ng-jhipster';",////////////////
+                                3, -1, pastaAPP + "shared/login/login.service.ts");
+
+                    }
+
+                    if (jCheckBox5.isSelected()) {
+                        jTextArea1.append("###########################CRIANDO PRIVILEGIOS E PREFERENCIAS###########################\n");
+///privilegios e preferencias
+                        Resources.storeResource("preferencias.service.ts", pastaAPP + "entities/");
+                        Resources.storeResource("privilegios.service.ts", pastaAPP + "entities/");
+                        Resources.appendFile(
+                                "export * from './preferencias.service';\n"
+                                + "export * from './privilegios.service';", pastaAPP + "entities/index.ts");
+
+                        Resources.insertOnFile(
+                                "import {PreferenciasService} from \"./entities/preferencias.service\";\n"
+                                + "import {PrivilegiosService} from \"./entities/privilegios.service\";",
+                                "} from './layouts';", pastaAPP + "app.module.ts", true);
+                        Resources.insertOnFile(
+                                "        PreferenciasService,\n"
+                                + "        PrivilegiosService,",
+                                "providers: [", pastaAPP + "app.module.ts", true);
+
+                        Resources.insertOnFile(
+                                "public getCurrentColaborador():  Observable<Colaborador> {\n"
+                                + "        return this.query().map(\n"
+                                + "            (res: ResponseWrapper) => {\n"
+                                + "                let c: Colaborador;\n"
+                                + "                const cs: Colaborador[] = res.json;\n"
+                                + "                if (cs.length < 2){\n"
+                                + "                    c = cs[0];\n"
+                                + "                } else {\n"
+                                + "                    c = cs.find(col  => col.id < 0);\n"
+                                + "                    c.id = cs.find( col => col.usuario.id === c.usuario.id ).id;\n"
+                                + "                }\n"
+                                + "                return c;\n"
+                                + "            }\n"
+                                + "        )\n"
+                                + "    }",
+                                ") { }", pastaAPP + "entities/colaborador/colaborador.service.ts", true);
+
+                        Resources.insertOnIntervalo(
+                                "  update(colaborador: Colaborador, nnootify? :boolean): Observable<Colaborador> {\n"
+                                + "        const copy = this.convert(colaborador);\n"
+                                + "        return this.http.put(this.resourceUrl, copy).map((res: Response) => {\n"
+                                + "            const jsonResponse = res.json();\n"
+                                + "\n"
+                                + "            if(nnootify)\n"
+                                + "                return this.convertItemFromServer(jsonResponse);\n"
+                                + "\n"
+                                + "            this.eventManager.broadcast({\n"
+                                + "                name: 'colaborador',\n"
+                                + "                content: 'update'\n"
+                                + "            });\n"
+                                + "\n"
+                                + "            return this.convertItemFromServer(jsonResponse);\n",
+                                ".*update.*",
+                                ".*convertItemFromServer.*", false, false,
+                                pastaAPP + "entities/colaborador/colaborador.service.ts");
+
+                        Resources.insertOnFile("    constructor(private http: Http, private dateUtils: JhiDateUtils,\n"
+                                + "                private eventManager: JhiEventManager,) { }", ") { }",
+                                pastaAPP + "entities/colaborador/colaborador.service.ts", false);
+
+                        Resources.insertOnPositionFile("import { JhiEventManager } from 'ng-jhipster';",
+                                5, -1,
+                                pastaAPP + "entities/colaborador/colaborador.service.ts");
+
+                        Resources.storeFilePrivilegios(pastaJAVA + "service/PrivilegioService.java", projeto);
+
+                        Resources.insertOnPositionFile("   ///find cargo from current user\n"
+                                + "\n"
+                                + "    @Query(\"select colaborador.cargos from Colaborador colaborador where colaborador.usuario.login = ?#{principal.username}\")\n"
+                                + "    List<Cargo> getCargosOfCurrentUser();", -1, 2, pastaJAVA + "repository/CargoRepository.java");
+
+                        Resources.insertOnPositionFile("import java.util.List;\n", 5, -1, pastaJAVA + "repository/CargoRepository.java");
+
+                        String fs = pastaJAVA + "web/rest/";
+
+                        Resources.projeto = projeto;
+                        Resources.retirarDeFileNome = "Resource";
+
+                        Resources.applyInMassa(fs, ".*Resource.*", ".*Account.*|.*Audit.*|.*Logs.*|.*Profile.*|.*User.*|.*Cargo.*",
+                                "insertOnPositionFile", new Object[]{
+                                    "import com.mikeias.${{projeto}}$.service.PrivilegioService;\n"
+                                    + "import com.mikeias.${{projeto}}$.domain.Cargo;\n"
+                                    + "import com.mikeias.${{projeto}}$.repository.CargoRepository;\n",
+                                    2,
+                                    -1,
+                                    new File(projeto)
+                                }, 0);
+
+                        Resources.applyInMassa(fs, ".*Cargo.*", ".*Account.*|.*Audit.*|.*Logs.*|.*Profile.*|.*User.*",
+                                "insertOnPositionFile", new Object[]{
+                                    "import com.mikeias.${{projeto}}$.service.PrivilegioService;\n",
+                                    2,
+                                    -1,
+                                    new File(projeto)
+                                }, 0);
+
+                        Resources.applyInMassa(fs, ".*Resource.*", ".*Account.*|.*Audit.*|.*Logs.*|.*Profile.*|.*User.*|.*CargoResource.*",
+                                "insertOnIntervalo",
+                                new Object[]{
+                                    "\n//////////////////////////////////REQUER PRIVILEGIOS\n"
+                                    + "                                  private final CargoRepository cargoRepository;\n"
+                                    + "\n"
+                                    + "                                  public ${{filename}}$(${{filenameAlterado}}$Repository ${{filenamealterado}}$Repository, CargoRepository cargoRepository) {\n"
+                                    + "                                  this.${{filenamealterado}}$Repository = ${{filenamealterado}}$Repository;\n"
+                                    + "                                  this.cargoRepository = cargoRepository;\n"
+                                    + "                                  }\n"
+                                    + "//////////////////////////////////REQUER PRIVILEGIOS\n\n",
+                                    ".*public.*Resource.*Repository.*", ".*}.*", false, false,
+                                    new File(projeto)
+                                }, 0);
+
+                        /////mod POST
+                        Resources.applyInMassa(fs, ".*Resource.*", ".*Account.*|.*Audit.*|.*Logs.*|.*Profile.*|.*User.*",
+                                "insertOnIntervalo",
+                                new Object[]{
+                                    "\n//////////////////////////////////REQUER PRIVILEGIOS\n"
+                                    + "                                  if (!PrivilegioService.podeCriar(cargoRepository, ENTITY_NAME)) {\n"
+                                    + "                                  log.error(\"TENTATIVA DE CRIAR SEM PERMISSÃO BLOQUEADA! \" + ENTITY_NAME  + \" : {}\", ${{filenamealterado}}$);\n"
+                                    + "                                  return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, \"privilegios insuficientes.\", \"Este usuario não possui privilegios sufuentes para criar esta entidade.\")).body(null);\n"
+                                    + "                                  }\n"
+                                    + "//////////////////////////////////REQUER PRIVILEGIOS\n\n",
+                                    ".*request to save.*",
+                                    ".*if.*",
+                                    true, true,
+                                    new File(projeto)
+                                }, 0);
+
+                        ////mod PUT
+                        Resources.applyInMassa(fs, ".*Resource.*", ".*Account.*|.*Audit.*|.*Logs.*|.*Profile.*|.*User.*",
+                                "insertOnIntervalo",
+                                new Object[]{
+                                    "\n//////////////////////////////////REQUER PRIVILEGIOS\n"
+                                    + "                                  if (!PrivilegioService.podeEditar(cargoRepository, ENTITY_NAME)) {\n"
+                                    + "                                  log.error(\"TENTATIVA DE EDITAR SEM PERMISSÃO BLOQUEADA! \" + ENTITY_NAME  + \" : {}\", ${{filenamealterado}}$);\n"
+                                    + "                                  return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, \"privilegios insuficientes.\", \"Este usuario não possui privilegios sufuentes para editar esta entidade.\")).body(null);\n"
+                                    + "                                  }\n"
+                                    + "//////////////////////////////////REQUER PRIVILEGIOS\n\n",
+                                    ".*request to update.*",
+                                    ".*if.*",
+                                    true, true,
+                                    new File(projeto)
+                                }, 0);
+
+                        ///mod GET
+                        Resources.applyInMassa(fs, ".*Resource.*", ".*Account.*|.*Audit.*|.*Logs.*|.*Profile.*|.*User.*",
+                                "insertOnIntervalo",
+                                new Object[]{
+                                    "\n//////////////////////////////////REQUER PRIVILEGIOS\n"
+                                    + "                                  if (!PrivilegioService.podeVer(cargoRepository, ENTITY_NAME)) {\n"
+                                    + "                                  ${{filenamealterado}}$ = null;\n"
+                                    + "                                  log.error(\"TENTATIVA DE VISUALIZAR SEM PERMISSÃO BLOQUEADA! \" + ENTITY_NAME + \" : {}\", id);\n"
+                                    + "                                  }\n"
+                                    + "//////////////////////////////////REQUER PRIVILEGIOS\n\n",
+                                    ".*Repository.findOne.*",
+                                    ".*return.*",
+                                    true, true,
+                                    new File(projeto)
+                                }, 0);
+                        Resources.applyInMassa(fs, ".*Resource.*", ".*Account.*|.*Audit.*|.*Logs.*|.*Profile.*|.*User.*",
+                                "insertOnIntervalo",
+                                new Object[]{
+                                    "\n//////////////////////////////////REQUER PRIVILEGIOS\n"
+                                    + "                                  if (!PrivilegioService.podeVer(cargoRepository, ENTITY_NAME)) {\n"
+                                    + "                                  log.error(\"TENTATIVA DE VISUALIZAR SEM PERMISSÃO BLOQUEADA! \" + ENTITY_NAME);\n"
+                                    + "                                  return  null;\n"
+                                    + "                                  }\n"
+                                    + "\n"
+                                    + "//////////////////////////////////REQUER PRIVILEGIOS\n\n",
+                                    ".*request to get all.*",
+                                    ".*return.*",
+                                    true, true,
+                                    new File(projeto)
+                                }, 0);
+
+                        ////mod DELETE
+                        Resources.applyInMassa(fs, ".*Resource.*", ".*Account.*|.*Audit.*|.*Logs.*|.*Profile.*|.*User.*",
+                                "insertOnIntervalo",
+                                new Object[]{
+                                    "\n//////////////////////////////////REQUER PRIVILEGIOS\n"
+                                    + "                                  if (PrivilegioService.podeDeletar(cargoRepository, ENTITY_NAME)) {\n"
+                                    + "                                  ${{filenamealterado}}$Repository.delete(id);\n"
+                                    + "                                  } else {\n"
+                                    + "                                  log.error(\"TENTATIVA DE EXCUIR SEM PERMISSÃO BLOQUEADA! \" + ENTITY_NAME + \" : {}\", id);\n"
+                                    + "                                  return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, \"privilegios insuficientes.\", \"Este usuario não possui privilegios sufuentes para deletar esta entidade.\")).body(null);\n"
+                                    + "                                  }\n"
+                                    + "//////////////////////////////////REQUER PRIVILEGIOS\n\n",
+                                    ".*request to delete.*",
+                                    ".*return.*",
+                                    true, true,
+                                    new File(projeto)
+                                }, 0);
+
+                        String content = "            <label>Permissões</label>\n"
+                                + "            <div class=\"table-responsive\">\n"
+                                + "            <table class=\"table table-striped\">\n"
+                                + "                <thead>\n"
+                                + "                <th>\n"
+                                + "                    Entidade\n"
+                                + "                </th>\n"
+                                + "                <th>\n"
+                                + "                    visualizar\n"
+                                + "                </th>\n"
+                                + "                <th>\n"
+                                + "                    Adicionar\n"
+                                + "                </th>\n"
+                                + "                <th>\n"
+                                + "                    Editar\n"
+                                + "                </th>\n"
+                                + "                <th>\n"
+                                + "                    Deletar\n"
+                                + "                </th>\n"
+                                + "                </thead>\n"
+                                + "                <tbody>\n"
+                                + "                <tr *ngFor=\"let entidade of entidades\">\n"
+                                + "                    <td>{{entidade}}</td>\n"
+                                + "                    <td>\n"
+                                + "                        <input #vari1 type=\"checkbox\" class=\"form-control\"\n"
+                                + "                               (change)=\"setCheck(vari1.checked, entidade, 'visualizar')\" [checked]=\"checks[entidade]['visualizar']\" />\n"
+                                + "                    </td>\n"
+                                + "                    <td>\n"
+                                + "                        <input #vari2 type=\"checkbox\" class=\"form-control\"\n"
+                                + "                               (change)=\"setCheck(vari2.checked, entidade, 'adicionar')\" [checked]=\"checks[entidade]['adicionar']\" />\n"
+                                + "                    </td>\n"
+                                + "                    <td>\n"
+                                + "                        <input #vari3 type=\"checkbox\" class=\"form-control\"\n"
+                                + "                               (change)=\"setCheck(vari3.checked, entidade, 'editar')\" [checked]=\"checks[entidade]['editar']\" />\n"
+                                + "                    </td>\n"
+                                + "                    <td>\n"
+                                + "                        <input #vari4 type=\"checkbox\" class=\"form-control\"\n"
+                                + "                               (change)=\"setCheck(vari4.checked, entidade, 'deletar')\" [checked]=\"checks[entidade]['deletar']\" />\n"
+                                + "                    </td>\n"
+                                + "                </tr>\n"
+                                + "                </tbody>\n"
+                                + "            </table>\n"
+                                + "            </div>";
+
+                        Resources.insertOnIntervalo(content, 
+                                ".*permissao.*", ".*cargo.*", false, false,
+                                pastaAPP + "entities/cargo/cargo-dialog.component.html");
+
+                        Resources.insertOnIntervalo("   save() {\n"
+                                + "        this.isSaving = true;\n"
+                                + "\n"
+                                + "        let priv = \"\";\n"
+                                + "\n"
+                                + "        this.entidades.forEach((ent :string) => {\n"
+                                + "            this.niveis.forEach((nv: string) => {\n"
+                                + "                if (this.checks[ent][nv]) {\n"
+                                + "                    priv += ent + \"-\" + nv + \",\";\n"
+                                + "                }\n"
+                                + "            });\n"
+                                + "        });\n"
+                                + "\n"
+                                + "\n"
+                                + "        this.cargo.permissao = priv;\n"
+                                + "\n"
+                                + "        if (this.cargo.id !== undefined) {\n"
+                                + "            this.subscribeToSaveResponse(\n"
+                                + "                this.cargoService.update(this.cargo));\n"
+                                + "        } else {\n"
+                                + "            this.subscribeToSaveResponse(\n"
+                                + "                this.cargoService.create(this.cargo));\n"
+                                + "        }\n"
+                                + "    }\n"
+                                + "\n"
+                                + "  setCheck(checked: boolean, entidade: string, nivel: string) {\n"
+                                + "        this.checks[entidade][nivel] = checked;\n"
+                                + "        console.log(checked + entidade + nivel);\n"
+                                + "        console.log(this.checks);\n"
+                                + "    }\n", ".*save[() {].*", ".*private subscribeToSaveResponse.*", false, true,
+                                pastaAPP + "entities/cargo/cargo-dialog.component.ts");
+
+                        Resources.insertOnIntervalo(
+                                "this.isSaving = false;\n"
+                                + " this.cargo.permissao.split(',').forEach((privilegio: string) => {\n"
+                                + "            const data: string[] = privilegio.split(\"_\");\n"
+                                + "            if (!isNullOrUndefined(data) && data.length === 2) {\n"
+                                + "                this.checks[data[0]][data[1]] = true;\n"
+                                + "            }\n"
+                                + "        });", ".*ngOnInit[() {].*", ".*}.*", true, true, "/home/mfernandes/nome7/src/main/webapp/app/entities/cargo/cargo-dialog.component.ts");
+
+                        Resources.insertOnIntervalo("    entidades: string[] = [\n"
+                                + "        \"cardapio\",\n"
+                                + "        \"cargo\",\n"
+                                + "        \"cliente\",\n"
+                                + "        \"colaborador\",\n"
+                                + "        \"comanda\",\n"
+                                + "        \"endereco\",\n"
+                                + "        \"imposto\",\n"
+                                + "        \"lancamento\",\n"
+                                + "        \"mesa\",\n"
+                                + "        \"nota\",\n"
+                                + "        \"produto\",\n"
+                                + "        \"restaurante\",\n"
+                                + "        \"venda\"\n"
+                                + "    ];\n"
+                                + "\n"
+                                + "    niveis: string[] = [\n"
+                                + "        \"visualizar\",\n"
+                                + "        \"adicionar\",\n"
+                                + "        \"editar\",\n"
+                                + "        \"deletar\"\n"
+                                + "    ];\n"
+                                + "\n"
+                                + "    checks: boolean[][] = [];\n"
+                                + "\n"
+                                + "\n"
+                                + "\n"
+                                + "    constructor(\n"
+                                + "        public activeModal: NgbActiveModal,\n"
+                                + "        private dataUtils: JhiDataUtils,\n"
+                                + "        private jhiAlertService: JhiAlertService,\n"
+                                + "        private cargoService: CargoService,\n"
+                                + "        private eventManager: JhiEventManager\n"
+                                + "    ) {\n"
+                                + "        this.entidades.forEach((ent :string) => {\n"
+                                + "\n"
+                                + "            const bols:boolean[] = [];\n"
+                                + "\n"
+                                + "            bols[\"visualizar\"] = false;\n"
+                                + "            bols[\"adicionar\"] = false;\n"
+                                + "            bols[\"editar\"] = false;\n"
+                                + "            bols[\"deletar\"] = false;\n"
+                                + "\n"
+                                + "            this.checks[ent] = bols;\n"
+                                + "        })\n"
+                                + "    }", ".*constructor.*", ".*}.*", false, false,
+                                pastaAPP + "entities/cargo/cargo-dialog.component.ts");
+
+                        Resources.applyInMassa(fs.replace("/src/main/", "/src/test/"), ".*Resource.*", ".*Account.*|.*Audit.*|.*Logs.*|.*Profile.*|.*User.*|.*Cargo.*",
+                                "insertOnPositionFile", new Object[]{
+                                    "import com.mikeias.${{projeto}}$.repository.CargoRepository;\n",
+                                    2,
+                                    -1,
+                                    new File(projeto)
+                                }, 0);
+
+                        Resources.applyInMassa(fs.replace("/src/main/", "/src/test/"), ".*Resource.*", ".*Account.*|.*Audit.*|.*Logs.*|.*Profile.*|.*User.*|.*Cargo.*",
+                                "insertOnFile", new Object[]{
+                                    "    private CargoRepository cargoRepository;\n\n "
+                                    + "    @Autowired\n",
+                                    "@Autowired",
+                                    new File(pastaJAVA),
+                                    true
+                                }, -1);
+
+                        Resources.retirarDeFileNome = "ResourceIntTest";
+
+                        Resources.applyInMassa(fs.replace("/src/main/", "/src/test/"), ".*Resource.*", ".*Account.*|.*Audit.*|.*Logs.*|.*Profile.*|.*User.*|.*Cargo.*",
+                                "insertOnIntervalo", new Object[]{
+                                    "        final ${{filenameAlterado}}$Resource ${{filenamealterado}}$Resource = new ${{filenameAlterado}}$Resource(${{filenamealterado}}$Repository,cargoRepository);\n",
+                                    ".*final.*Resource.*Resource.*new .*Resource.*Repository.*",
+                                    ".*this.*", false, true,
+                                    new File(projeto)
+                                }, 0);
+
+                    }
+
+                    if (jCheckBox4.isSelected()) {
+                        jTextArea1.append("###########################CRIANDO TABLE HEADER###########################\n");
+                        ///tabke header
+                        Resources.storeResource("tableheader.component.html", pastaAPP + "layouts/tableheader/");
+                        Resources.storeResource("tableheader.component.scss", pastaAPP + "layouts/tableheader/");
+                        Resources.storeResource("tableheader.component.ts", pastaAPP + "layouts/tableheader/");
+                        Resources.storeResource("tableheader.directive.ts", pastaAPP + "shared/utils/");
+
+                        ///imports
+                        Resources.insertOnFile(
+                                "import { TableheaderComponent } from './layouts/tableheader/tableheader.component';",
+                                "} from './layouts';", pastaAPP + "app.module.ts", true);
+
+                        Resources.insertOnFile(
+                                "TableheaderComponent,",
+                                "declarations: [", pastaAPP + "app.module.ts", true);
+                        Resources.insertOnFile(
+                                "    entryComponents: [\n"
+                                + "        TableheaderComponent,\n"
+                                + "    ],",
+                                "],", pastaAPP + "app.module.ts", true);
+
+                        Resources.appendFile("export * from './tableheader/tableheader.component';",
+                                pastaAPP + "layouts/index.ts");
+
+                        Resources.appendFile("export * from './utils/tableheader.directive';",
+                                pastaAPP + "shared/index.ts");
+
+                        Resources.insertOnFile(
+                                "import {TableheaderDirective} from \"./utils/tableheader.directive\";",
+                                "} from './';", pastaAPP + "shared/shared.module.ts", true);
+
+                        Resources.insertOnFile(
+                                "TableheaderDirective,",
+                                "declarations: [", pastaAPP + "shared/shared.module.ts", true);
+
+                        Resources.insertOnFile(
+                                "TableheaderDirective,",
+                                "exports: [", pastaAPP + "shared/shared.module.ts", true);
+
+                        ///configurar tabelas
+                        String local = pastaAPP + "entities/";
+
+                        Resources.applyInMassa(
+                                local,
+                                ".*component.html",
+                                ".*-.*",
+                                "insertOnIntervaloFile",
+                                new Object[]{
+                                    " <div #tableH>\n"
+                                    + "    </div>\n"
+                                    + "\n"
+                                    + "\n"
+                                    + "        <div class=\"table-responsive\" *ngIf=\"${{filename}}$s\">\n"
+                                    + "            <table class=\"table table-striped\" [jhiTableheader]=\"{'view': tableHeader, 'entidade': '${{filename}}$'}\">\n"
+                                    + "                <thead>\n"
+                                    + "                <tr>\n"
+                                    + "                    <!--<th><span jhiTranslate=\"global.field.id\">ID</span></th>-->",
+                                    ".*table-responsive.*",
+                                    ".*ID.*",
+                                    false,
+                                    false,
+                                    new File("/home/")
+                                }, 0);
+                        ///insertOnFile(String text, String depoisDe, String file, boolean incluirLinha)
+                        Resources.applyInMassa(
+                                local,
+                                ".*component.html",
+                                ".*-.*",
+                                "insertOnFile",
+                                new Object[]{
+                                    "                    <th style=\"text-align: center;\"><span><span>Ações</span></span></th>",
+                                    "<th></th>",
+                                    new File("/home/"),
+                                    false
+                                }, -1);
+
+                        Resources.applyInMassa(
+                                local,
+                                ".*component.html",
+                                ".*-.*",
+                                "insertOnFile",
+                                new Object[]{
+                                    "                    <!--<td><a [routerLink]=\"['../${{filename}}$', ${{filename}}$.id ]\">{{${{filename}}$.id}}</a></td>-->",
+                                    "id}}</a></td>",
+                                    new File("/home/"),
+                                    false
+                                }, 0);
+
+                        Resources.applyInMassa(
+                                local,
+                                ".*component.ts",
+                                ".*-.*",
+                                "insertOnFile",
+                                new Object[]{
+                                    "@ViewChild('tableH', {read: ViewContainerRef}) tableHeader;",
+                                    "implements OnInit, OnDestroy {",
+                                    new File("/home/"),
+                                    true
+                                }, -1);
+
+                        Resources.applyInMassa(
+                                local,
+                                ".*component.ts",
+                                ".*-.*",
+                                "insertOnFile",
+                                new Object[]{
+                                    "import {Component, OnInit, OnDestroy, ViewChild, ViewContainerRef} from '@angular/core';",
+                                    "} from '@angular/core';",
+                                    new File("/home/"),
+                                    false
+                                }, -1);
+                    }
+
+                    if (jCheckBox2.isSelected()) {
+                        jTextArea1.append("###########################INSTALANDO HTML EDITOR###########################\n");
+                        runCommand(dir, "npm,install,popper.js@^1.11.0,--save");
+                        runCommand(dir, "npm,install,ngx-quill-editor,--save");
+                    }
+
+                    if (jCheckBox3.isSelected()) {
+                        jTextArea1.append("###########################INSTALANDO QRSCANER###########################\n");
+                        runCommand(dir, "npm,install,angular2-qrscanner,--save");
+                    }
+
+                    jTextArea1.append("###########################LANÇANDO TERMINAIS###########################\n");
+
                     Runtime.getRuntime().exec(new String[]{"gnome-terminal", /////"--disable-factory",
                         "--working-directory=" + dir.getAbsolutePath(), "-x", "yarn", "install"}).waitFor();
 
@@ -809,13 +1579,7 @@ public class MainView extends javax.swing.JFrame {
 
                     Runtime.getRuntime().exec(new String[]{"gnome-terminal",
                         "--working-directory=" + dir.getAbsolutePath(), "-x", "./mvnw"}).waitFor();
-                    if (jCheckBox2.isSelected())
-                    Runtime.getRuntime().exec(new String[]{"gnome-terminal",
-                        "--working-directory=" + dir.getAbsolutePath(), "-x", "npm install ngx-quill-editor --save"}).waitFor();
-                    if (jCheckBox3.isSelected())
-                    Runtime.getRuntime().exec(new String[]{"gnome-terminal",
-                        "--working-directory=" + dir.getAbsolutePath(), "-x", "npm install --save angular2-qrscanner"}).waitFor();
-                    
+
                     Runtime.getRuntime().exec(new String[]{"gnome-terminal",
                         "--working-directory=" + dir.getAbsolutePath(), "-x", "sudo", "yarn", "start"}).waitFor();
 
@@ -824,6 +1588,8 @@ public class MainView extends javax.swing.JFrame {
                     Runtime.getRuntime().exec(new String[]{"git", "commit", "-m", "\"commit inicial\""}, new String[]{""}, dir).waitFor();
                     if (jCheckBox1.isSelected()) {
                         System.exit(0);
+                    } else {
+                        jButton2.setEnabled(true);
                     }
 
                 } catch (IOException ex) {
@@ -833,7 +1599,59 @@ public class MainView extends javax.swing.JFrame {
                 }
 
             }
+
         }).start();
 
     }
+
+    static boolean rodando = true;
+    static int cont = 0;
+
+    private void runCommand(File dir, String comando) {
+        rodando = true;
+        try {
+            Process exec = Runtime.getRuntime().exec(comando.split(","), new String[]{""}, dir);
+
+            new Thread(() -> {
+
+                try {
+                    Scanner sc = new Scanner(exec.getErrorStream());
+                    while (sc.hasNextLine() || rodando) {
+                        String next = sc.nextLine();
+
+                        jTextArea1.append("ATENCAO: " + next + "\n");
+
+                        if (cont++ > 1000) {
+                            jTextArea1.setText("");
+                            cont = 0;
+                        }
+
+                    }
+                } catch (Exception ex) {
+
+                }
+            }).start();
+
+            Scanner sc = new Scanner(exec.getInputStream());
+
+            while (sc.hasNextLine()) {
+                String next = sc.nextLine();
+
+                jTextArea1.append(next + "\n");
+
+                if (cont++ > 1000) {
+                    jTextArea1.setText("");
+                    cont = 0;
+                }
+            }
+
+            rodando = false;
+
+        } catch (Exception ex) {
+            System.err.println("Impossivel rodar comando " + comando);
+            System.err.println(ex);
+        }
+
+    }
 }
+//popper.js@^1.11.0
