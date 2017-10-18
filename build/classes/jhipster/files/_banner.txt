@@ -1,0 +1,15 @@
+
+${AnsiColor.<%=bannerColor%>}<%=asciiArtBannerMessage%>
+
+Desenvolvido por
+${AnsiColor.BLUE}              Miquéias Fernandes
+
+                www.mikeias.net
+      contatomiqueiasfernandes@hotmailcom
+              (28) 99985 - 0280
+
+<%_ if (appendJHipsterMessage) { _%>
+<%_ } _%>
+${AnsiColor.WHITE}Generated with ${AnsiColor.RED}♥${AnsiColor.WHITE} by  ${AnsiColor.GREEN}J${AnsiColor.RED}HIPSTER
+${AnsiColor.BRIGHT_BLUE}:: JHipster 🤓  :: Running Spring Boot ${spring-boot.version} ::
+:: http://jhipster.github.io ::${AnsiColor.DEFAULT}

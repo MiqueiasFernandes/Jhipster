@@ -1,0 +1,55 @@
+
+Mostrar colunas
+
+<div class="row">
+
+    <div class="col">
+        <ul>
+            <li class="hideheader" *ngFor="let coluna of colunas1">
+            {{coluna}}:
+            <label class="switch">
+                <input type="checkbox" #chk (change)="alterar(chk.checked, coluna)" [checked]="checks[coluna]">
+                <span class="slider round"></span>
+            </label>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col">
+        <ul>
+            <li class="hideheader" *ngFor="let coluna of colunas2">
+            {{coluna}}:
+            <label class="switch">
+                <input type="checkbox" #chk (change)="alterar(chk.checked, coluna)" [checked]="checks[coluna]">
+                <span class="slider round"></span>
+            </label>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="col">
+        <ul>
+            <li class="hideheader" *ngFor="let coluna of colunas3">
+            {{coluna}}:
+            <label class="switch">
+                <input type="checkbox" #chk (change)="alterar(chk.checked, coluna)" [checked]="checks[coluna]">
+                <span class="slider round"></span>
+            </label>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col">
+        <ul>
+            <li class="hideheader" *ngFor="let coluna of colunas4">
+            {{coluna}}:
+            <label class="switch">
+                <input type="checkbox" #chk (change)="alterar(chk.checked, coluna)" [checked]="checks[coluna]">
+                <span class="slider round"></span>
+            </label>
+            </li>
+        </ul>
+    </div>
+
+</div>
