@@ -43,6 +43,7 @@ public class Resources {
         try {
             file.mkdirs();
         } catch (Exception e) {
+            System.out.println("falhou ao salvar " + name + " em " + local);
             System.err.println(e);
         }
 
@@ -69,6 +70,7 @@ public class Resources {
             fw.append("\n" + text);
             fw.close();
         } catch (Exception ex) {
+             System.out.println("falhou ao append " + text + " em " + file);
             System.err.println(ex);
         }
     }
@@ -99,6 +101,7 @@ public class Resources {
             fw.write(sb.toString());
             fw.close();
         } catch (Exception ex) {
+             System.out.println("falhou ao prepend " + text + " em " + file);
             System.err.println(ex);
         }
 
@@ -145,6 +148,7 @@ public class Resources {
             fw.write(sb.toString());
             fw.close();
         } catch (Exception ex) {
+             System.out.println("falhou ao inserir " + text + " em " + file);
             System.err.println(ex);
         }
     }
@@ -205,6 +209,7 @@ public class Resources {
             fw.write(sb.toString());
             fw.close();
         } catch (Exception ex) {
+             System.out.println("falhou ao inserir em intervalo " + text + " em " + file.getAbsolutePath());
             System.err.println(ex);
         }
     }
@@ -251,6 +256,7 @@ public class Resources {
             fw.write(sb.toString());
             fw.close();
         } catch (Exception ex) {
+             System.out.println("falhou ao replace " + text + " em " + file);
             System.err.println(ex);
         }
     }
@@ -359,6 +365,7 @@ public class Resources {
                 }
             }
         } catch (Exception ex) {
+             System.out.println("falhou ao get files " + diretorio);
             System.err.println("erro " + ex);
         }
         return files.toArray(new File[]{});
@@ -413,6 +420,7 @@ public class Resources {
             fw.write(sb.toString());
             fw.close();
         } catch (Exception ex) {
+             System.out.println("falhou ao insert on position " + text + " em " + file);
             System.err.println(ex);
         }
 

@@ -326,7 +326,7 @@ public class MainView extends javax.swing.JFrame {
         Resources.insertOnIntervalo(
                 "this.isSaving = false;\n"
                 + " this.cargo.permissao.split(',').forEach((privilegio: string) => {\n"
-                + "            const data: string[] = privilegio.split(\"_\");\n"
+                + "            const data: string[] = privilegio.split(\"-\");\n"
                 + "            if (!isNullOrUndefined(data) && data.length === 2) {\n"
                 + "                this.checks[data[0]][data[1]] = true;\n"
                 + "            }\n"
@@ -1354,14 +1354,16 @@ public class MainView extends javax.swing.JFrame {
                                 + "    }\n", ".*save[() {].*", ".*private subscribeToSaveResponse.*", false, true,
                                 pastaAPP + "entities/cargo/cargo-dialog.component.ts");
 
+                        Resources.insertOnPositionFile("import {isNullOrUndefined} from 'util';\n", 3, -1, pastaAPP + "entities/cargo/cargo-dialog.component.ts");
+                        
                         Resources.insertOnIntervalo(
                                 "this.isSaving = false;\n"
                                 + " this.cargo.permissao.split(',').forEach((privilegio: string) => {\n"
-                                + "            const data: string[] = privilegio.split(\"_\");\n"
+                                + "            const data: string[] = privilegio.split(\"-\");\n"
                                 + "            if (!isNullOrUndefined(data) && data.length === 2) {\n"
                                 + "                this.checks[data[0]][data[1]] = true;\n"
                                 + "            }\n"
-                                + "        });", ".*ngOnInit[() {].*", ".*}.*", true, true, "/home/mfernandes/nome7/src/main/webapp/app/entities/cargo/cargo-dialog.component.ts");
+                                + "        });", ".*ngOnInit[() {].*", ".*}.*", true, true, pastaAPP + "entities/cargo/cargo-dialog.component.ts");
 
                         Resources.insertOnIntervalo("    entidades: string[] = [\n"
                                 + "        \"cardapio\",\n"
